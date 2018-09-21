@@ -5,7 +5,7 @@ import TableRow from "./TableRow";
 class ResultsTable extends Component {
   render() {
     return (
-      <table id="search-table">
+      <table class="result-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -15,9 +15,9 @@ class ResultsTable extends Component {
           </tr>
         </thead>
         <tbody>
-          {testData.data.search.nodes.map((repo, i) => {
+          {this.props.data && this.props.data.search.nodes.map((repo, i) => {
             return (
-              <TableRow repo={repo} table={this.props.table} />
+              <TableRow repo={repo} table={this.props.table} key={repo.id}/>
             )
           })}
         </tbody>

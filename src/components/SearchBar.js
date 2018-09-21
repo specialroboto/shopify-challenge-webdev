@@ -3,28 +3,37 @@ import React, { Component } from 'react';
 class SearchBar extends Component {
   constructor() {
     super();
+    this.state = {search: ""};
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleKeyPress(e) {
     // key="Enter" or charCode=13
-    // console.log(e);
-    // console.log(e.charCode);
-    console.log(e.key);
-    // console.log(e.target.value);
-    // console.log(e.nativeEvent.data);
-    // console.log(e.target.value);
+    if (e.key === "Enter") {
+      this.handleSubmit(e);
+    }
   }
 
-  hangleChange(e) {
-    console.log(e.target.value);
+  handleChange(e) {
+    this.setState({search: e.target.value});
+
+    if (e.target.value === "") {
+      this.props.clearSearch();
+    }
+  }
+
+  handleSubmit(e) {
+    this.props.performSearch(this.state.search);
   }
 
   render() {
     return (
       <div id="search-bar">
-        <input id="search-input" type="text" value="" onKeyPress={this.handleKeyPress} onChange={this.hangleChange} />
-        <input id="search-button" type="button" value="Search" />
+        <input id="search-input" type="text" value={this.state.search} onKeyPress={this.handleKeyPress} onChange={this.handleChange} />
+        <input id="search-button" type="button" value="Search" onClick={this.handleSubmit} />
       </div>
     );
   }

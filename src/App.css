@@ -57,8 +57,8 @@ th {
   margin-left: 1em;
 }
 
-#search-table {
-
+.result-table {
+  /* transition: transform 1s ease-in-out; */
 }
 
 #favorite-section {
