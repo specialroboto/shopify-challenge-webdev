@@ -14,7 +14,7 @@ class SearchSection extends Component {
   render() {
     return (
       <div class="section" id="favorite-section">
-        <ResultsTable table="favorite" />
+        {this.props.favorites.length > 0 && <ResultsTable data={this.props.favorites} removeFavorite={this.props.removeFavorite} table="favorite" />}
       </div>
     );
   }

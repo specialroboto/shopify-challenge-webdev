@@ -11,13 +11,13 @@ class ResultsTable extends Component {
             <th>Name</th>
             <th>Language</th>
             <th>Latest tag</th>
-            <th></th>
+            <th>{"    "}</th>
           </tr>
         </thead>
         <tbody>
-          {this.props.data && this.props.data.search.nodes.map((repo, i) => {
+          {this.props.data && this.props.data.map((repo, index) => {
             return (
-              <TableRow repo={repo} table={this.props.table} key={repo.id}/>
+              <TableRow repo={repo} index={index} table={this.props.table} key={repo.id} addFavorite={this.props.addFavorite} removeFavorite={this.props.removeFavorite} favoritesList={this.props.favoritesList} />
             )
           })}
         </tbody>

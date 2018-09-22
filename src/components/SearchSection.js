@@ -9,7 +9,7 @@ class SearchSection extends Component {
   constructor() {
     super();
 
-    this.state = {data: null}
+    this.state = { search: null }
 
     this.performSearch = this.performSearch.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
@@ -38,14 +38,18 @@ class SearchSection extends Component {
     //     }
     //   }`
 
-    const query = `{ search(query: "${searchVal}", type: REPOSITORY, first: 10) { nodes { ... on Repository { id nameWithOwner primaryLanguage { name } releases(first: 1, orderBy: {field: CREATED_AT, direction: DESC}) { nodes { tag { name } } } } } } }`
+    // const query = `{ search(query: "${searchVal}", type: REPOSITORY, first: 10) { nodes { ... on Repository { id nameWithOwner primaryLanguage { name } releases(first: 1, orderBy: {field: CREATED_AT, direction: DESC}) { nodes { name tag { name } } } } } } }`
+
+
+    const query = `{ search(query: "${searchVal}", type: REPOSITORY, first: 10) { nodes { ... on Repository { id nameWithOwner primaryLanguage { name } releases(first: 3 , orderBy: {field: CREATED_AT, direction: DESC}) { nodes { name tag { name } } } } } } }`
 
     let response = await axios({
       url: "https://api.github.com/graphql",
       method: "post",
       headers: {
         // "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.REACT_APP_GITHUB_API_KEY}`},
+        "Authorization": `Bearer ${process.env.REACT_APP_GITHUB_API_KEY}`
+      },
       data: {
         query: query
       }
@@ -56,23 +60,23 @@ class SearchSection extends Component {
 
     console.log(response)
 
-    this.setState({data: response.data})
+    this.setState({ search: response.data })
   }
 
   clearSearch() {
-    this.setState({data: null});
+    this.setState({ search: null });
   }
 
   displaySearchResults() {
 
-    if (this.state.data === null) {
+    if (this.state.search === null) {
       return "Perform your search in the search bar above"
-    } else if (this.state.data && this.state.data.data === null && this.state.data.hasOwnProperty("errors")) {
+    } else if (this.state.search && this.state.search.data === null && this.state.search.hasOwnProperty("errors")) {
       return "Error: Something has happened"
-    } else if (this.state.data && this.state.data.data.search.nodes.length === 0) {
+    } else if (this.state.search && this.state.search.data.search.nodes.length === 0) {
       return "Sorry no search results"
-    } else if (this.state.data && this.state.data.data.search.nodes.length > 0) {
-      return <ResultsTable data={this.state.data.data} table="search" />
+    } else if (this.state.search && this.state.search.data.search.nodes.length > 0) {
+      return <ResultsTable data={this.state.search.data.search.nodes} table="search" addFavorite={this.props.addFavorite} favoritesList={this.props.favoritesList} />
     }
 
   }
