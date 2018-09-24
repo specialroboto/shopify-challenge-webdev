@@ -11,7 +11,6 @@ class AppMain extends Component {
 
     this.state = {
       search: null,
-      fav: {},
       favorites: [],
       favoritesList: []
     }
@@ -32,22 +31,19 @@ class AppMain extends Component {
   }
 
   addFavorite(node) {
-    let { fav, favorites, favoritesList } = this.state;
-    fav[node.id]= node;
+    let { favorites, favoritesList } = this.state;
+
     favorites.push(node);
     favoritesList.push(node.id);
+
     this.setState({
-      fav: fav,
       favorites: favorites,
       favoritesList: favoritesList
     });
-    console.log(this.state.fav,this.state.favorites, this.state.favoritesList)
   }
 
   removeFavorite(index, id) {
-    let { fav, favorites, favoritesList } = this.state;
-
-    delete fav[id];
+    let { favorites, favoritesList } = this.state;
 
     favorites.splice(index, 1);
     favoritesList.splice(index, 1);
@@ -58,19 +54,12 @@ class AppMain extends Component {
     });
   }
 
-  // TODO: Decide on which data structure to use. Array vs Hashmap?
-  changeHMtoArray() {
-    return this.state.favoritesList.map(id => {
-      return this.state.fav[id]
-    })
-  }
-
   render() {
     console.log(this.changeHMtoArray())
     return (
       <main class="flex-row">
         <SearchSection search={this.state.search} favoritesList={this.state.favoritesList} addFavorite={this.addFavorite} searchToState={this.searchToState} clearSearch={this.clearSearch} />
-        <FavoriteSection xfavorites={this.state.favorites} favorites={this.changeHMtoArray()} removeFavorite={this.removeFavorite} />
+        <FavoriteSection favorites={this.state.favorites} removeFavorite={this.removeFavorite} />
       </main>
     );
   }
