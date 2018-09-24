@@ -55,7 +55,6 @@ class AppMain extends Component {
   }
 
   render() {
-    console.log(this.changeHMtoArray())
     return (
       <main class="flex-row">
         <SearchSection search={this.state.search} favoritesList={this.state.favoritesList} addFavorite={this.addFavorite} searchToState={this.searchToState} clearSearch={this.clearSearch} />
@@ -66,7 +65,3 @@ class AppMain extends Component {
 }
 
 export default AppMain;
-
-// look into skip  https://github.com/Akryum/vue-apollo/issues/36
-
-// or https://www.howtographql.com/react-apollo/7-filtering-searching-the-list-of-links/

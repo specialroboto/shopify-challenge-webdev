@@ -7,7 +7,7 @@ import StatusMessage from "./StatusMessage.js";
 class SearchSection extends Component {
 
   displaySearchResults() {
-
+    // Returns appropriate status message or displays search result table
     if (this.props.search === null) {
       return <StatusMessage text="Perform your search in the search bar above" />
     } else if (this.props.search && this.props.search.data === null && this.props.search.hasOwnProperty("errors")) {
@@ -17,7 +17,6 @@ class SearchSection extends Component {
     } else if (this.props.search && this.props.search.data.search.nodes.length > 0) {
       return <ResultsTable data={this.props.search.data.search.nodes} table="search" addFavorite={this.props.addFavorite} favoritesList={this.props.favoritesList} />
     }
-
   }
 
   render() {

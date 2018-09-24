@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import testData from './testData.json';
 import TableRow from "./TableRow";
 
 class ResultsTable extends Component {
@@ -11,7 +10,7 @@ class ResultsTable extends Component {
             <th>Name</th>
             <th>Language</th>
             <th>Latest tag</th>
-            <th>{"    "}</th>
+            <th className="add-remove-col" ></th>
           </tr>
         </thead>
         <tbody>

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class TableRow extends Component {
-  constructor() {
-    super();
-  }
 
   addButton() {
     return (<a href="#!" onClick={() => this.props.addFavorite(this.props.repo)}>Add</a>);

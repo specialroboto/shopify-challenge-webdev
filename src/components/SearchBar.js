@@ -4,7 +4,7 @@ import axios from 'axios';
 class SearchBar extends Component {
   constructor() {
     super();
-    this.state = {search: ""};
+    this.state = {searchVal: ""};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -20,22 +20,32 @@ class SearchBar extends Component {
   }
 
   handleChange(e) {
-    this.setState({search: e.target.value});
+    this.setState({searchVal: e.target.value});
 
     if (e.target.value === "") {
       this.props.clearSearch();
     }
   }
 
+  removeInvalidChars(string) {
+    // Double quote and backslash seems to be the only character that causes an error, more testing might be needed
+    // Alternatively could add live validation to handleChange, but this method does not seem to alter search results and bothers the user less
+    return string.replace(/[\\"]/g, " ");
+  }
+
   handleSubmit() {
-    this.performSearch(this.state.search);
+    this.performSearch(this.state.searchVal);
   }
 
   async performSearch(searchVal) {
 
-    // Graphql query string
-    const query = `{ search(query: "${searchVal}", type: REPOSITORY, first: 10) { nodes { ... on Repository { id nameWithOwner primaryLanguage { name } releases(first: 1 , orderBy: {field: CREATED_AT, direction: DESC}) { nodes { name tag { name } } } } } } }`
+    let cleanSearchVal = this.removeInvalidChars(searchVal);
 
+    // Graphql query string
+    const query = `{ search(query: "${cleanSearchVal}", type: REPOSITORY, first: 10) { nodes { ... on Repository { id nameWithOwner primaryLanguage { name } releases(first: 1 , orderBy: {field: CREATED_AT, direction: DESC}) { nodes { name tag { name } } } } } } }`
+
+    // Looked into using Apollo for Graphql but not sure if it was worth the overhead exspecially for such a simple use
+    // The main reason for choosing to go with the Graphql api was in order to minimize the number of request needed
     let response = await axios({
       url: "https://api.github.com/graphql",
       method: "post",
@@ -55,7 +65,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div id="search-bar">
-        <input id="search-input" type="text" value={this.state.search} onKeyPress={this.handleKeyPress} onChange={this.handleChange} />
+        <input id="search-input" type="text" value={this.state.searchVal} onKeyPress={this.handleKeyPress} onChange={this.handleChange} />
         <input id="search-button" type="button" value="Search" onClick={this.handleSubmit} />
       </div>
     );

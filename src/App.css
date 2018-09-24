@@ -63,13 +63,21 @@ th {
   margin-left: 1rem;
 }
 
+.message {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
 .result-table {
-  /* transition: transform 1s ease-in-out; */
   font-size: 1.15rem;
 }
 
 td, th {
   padding: 0.25rem;
+}
+
+.add-remove-col {
+  min-width: 2rem;
 }
 
 #favorite-section {
