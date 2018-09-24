@@ -25,7 +25,7 @@ class TableRow extends Component {
     return (
       <tr>
         <td>
-          <a href={`https://www.github.com/${nameWithOwner}`}>{nameWithOwner}</a>
+          <a className="name-link" href={`https://www.github.com/${nameWithOwner}`}>{nameWithOwner}</a>
         </td>
         <td>
           {/* Somtimes repos don't have a primary language */}

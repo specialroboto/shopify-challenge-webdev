@@ -56,7 +56,7 @@ class AppMain extends Component {
 
   render() {
     return (
-      <main class="flex-row">
+      <main className="flex-row">
         <SearchSection search={this.state.search} favoritesList={this.state.favoritesList} addFavorite={this.addFavorite} searchToState={this.searchToState} clearSearch={this.clearSearch} />
         <FavoriteSection favorites={this.state.favorites} removeFavorite={this.removeFavorite} />
       </main>

@@ -21,7 +21,7 @@ class SearchSection extends Component {
 
   render() {
     return (
-      <div class="section">
+      <div className="section">
         <SearchBar performSearch={this.performSearch} clearSearch={this.props.clearSearch} searchToState={this.props.searchToState} />
         {this.displaySearchResults()}
       </div>

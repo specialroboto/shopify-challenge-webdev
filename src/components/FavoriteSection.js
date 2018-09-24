@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
 import ResultsTable from "./ResultsTable.js";
 
-class SearchSection extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      favorites: [],
-      favoritesNameList: []
-    }
-  }
+class FavoriteSection extends Component {
 
   render() {
     return (
-      <div class="section" id="favorite-section">
+      <div className="section" id="favorite-section">
         {this.props.favorites.length > 0 && <ResultsTable data={this.props.favorites} removeFavorite={this.props.removeFavorite} table="favorite" />}
       </div>
     );
   }
 }
 
-export default SearchSection;
+export default FavoriteSection;

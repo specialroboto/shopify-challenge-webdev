@@ -80,6 +80,10 @@ td, th {
   min-width: 2rem;
 }
 
+.name-link {
+  text-decoration: none;
+}
+
 #favorite-section {
   background-color: #f3ecfe;
   min-height: 100%;

@@ -5,10 +5,13 @@ This project was built in React using the GitHub v4 api.
 
 ## Getting Started
 1. Clone this repository
-2. Enter into the project folder ex. cd shopify-challenge-webdev
+2. Enter into the project folder ex. `cd shopify-challenge-webdev`
 3. Run npm install
-4. **Important** Create a copy of .env.example and rename it to .env then enter your GitHub API key into the REACT_APP_GITHUB_API_KEY variable
-5. Run npm start to run the React development enviroment and follow the link in the command line to view the app. Usually http://localhost:3000/.
+4. **Important** Create a copy of .env.example and rename it to .env then enter your GitHub API key into the `REACT_APP_GITHUB_API_KEY` variable
+5. Run `npm start` to run the React development enviroment and follow the link in the command line to view the app. Usually http://localhost:3000/.
+
+## Screenshots
+!["Screenshot of App"](https://github.com/specialroboto/shopify-challenge-webdev/blob/master/screenshots/web-dev-screenshot.png)
 
 ## Built With
 - React

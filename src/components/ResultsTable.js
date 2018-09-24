@@ -4,7 +4,7 @@ import TableRow from "./TableRow";
 class ResultsTable extends Component {
   render() {
     return (
-      <table class="result-table">
+      <table className="result-table">
         <thead>
           <tr>
             <th>Name</th>

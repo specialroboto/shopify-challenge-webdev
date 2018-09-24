@@ -42,7 +42,7 @@ class SearchBar extends Component {
     let cleanSearchVal = this.removeInvalidChars(searchVal);
 
     // Graphql query string
-    const query = `{ search(query: "${cleanSearchVal}", type: REPOSITORY, first: 10) { nodes { ... on Repository { id nameWithOwner primaryLanguage { name } releases(first: 1 , orderBy: {field: CREATED_AT, direction: DESC}) { nodes { name tag { name } } } } } } }`
+    const query = `{ search(query: "${cleanSearchVal}", type: REPOSITORY, first: 10) { nodes { ... on Repository { id nameWithOwner primaryLanguage { name } releases(first: 1 , orderBy: {field: CREATED_AT, direction: DESC}) { nodes { tag { name } } } } } } }`
 
     // Looked into using Apollo for Graphql but not sure if it was worth the overhead exspecially for such a simple use
     // The main reason for choosing to go with the Graphql api was in order to minimize the number of request needed
