@@ -10,15 +10,25 @@ class AppMain extends Component {
     super();
 
     this.state = {
+      search: null,
       fav: {},
       favorites: [],
-      favoritesList: [],
-      search: null
+      favoritesList: []
     }
+
+    this.searchToState = this.searchToState.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
 
     this.addFavorite = this.addFavorite.bind(this);
     this.removeFavorite = this.removeFavorite.bind(this);
-    // this.changeData = this.changeData.bind(this);
+  }
+
+  searchToState(searchData) {
+    this.setState({ search: searchData })
+  }
+
+  clearSearch() {
+    this.setState({ search: null });
   }
 
   addFavorite(node) {
@@ -31,11 +41,13 @@ class AppMain extends Component {
       favorites: favorites,
       favoritesList: favoritesList
     });
-    console.log(this.state.favorites, this.state.favoritesList)
+    console.log(this.state.fav,this.state.favorites, this.state.favoritesList)
   }
 
-  removeFavorite(index) {
-    let { favorites, favoritesList } = this.state;
+  removeFavorite(index, id) {
+    let { fav, favorites, favoritesList } = this.state;
+
+    delete fav[id];
 
     favorites.splice(index, 1);
     favoritesList.splice(index, 1);
@@ -57,7 +69,7 @@ class AppMain extends Component {
     console.log(this.changeHMtoArray())
     return (
       <main class="flex-row">
-        <SearchSection favoritesList={this.state.favoritesList} addFavorite={this.addFavorite} />
+        <SearchSection search={this.state.search} favoritesList={this.state.favoritesList} addFavorite={this.addFavorite} searchToState={this.searchToState} clearSearch={this.clearSearch} />
         <FavoriteSection xfavorites={this.state.favorites} favorites={this.changeHMtoArray()} removeFavorite={this.removeFavorite} />
       </main>
     );

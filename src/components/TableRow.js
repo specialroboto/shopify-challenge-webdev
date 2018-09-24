@@ -6,11 +6,20 @@ class TableRow extends Component {
   }
 
   addButton() {
-    return (<a onClick={() => this.props.addFavorite(this.props.repo)}>Add</a>);
+    return (<a href="#!" onClick={() => this.props.addFavorite(this.props.repo)}>Add</a>);
   }
 
   removeButton() {
-    return (<a onClick={() => this.props.removeFavorite(this.props.index)}>Remove</a>);
+    return (<a href="#!" onClick={() => this.props.removeFavorite(this.props.index, this.props.repo.id)}>Remove</a>);
+  }
+
+  displayButton(table, id) {
+    // Returns either a Add button or Remove button depending on value passed into table prop
+    if (table === "search" && !this.props.favoritesList.includes(id)) {
+      return this.addButton();
+    } else if (table === "favorite") {
+      return this.removeButton();
+    }
   }
 
   render() {
@@ -32,8 +41,9 @@ class TableRow extends Component {
           {releases.nodes.length > 0 && releases.nodes[0] && releases.nodes[0].tag ? releases.nodes[0].tag.name : "-"}
         </td>
         <td>
-          {table === "search" && !this.props.favoritesList.includes(id) && this.addButton()}
-          {table === "favorite" && this.removeButton()}
+          {/* {table === "search" && !this.props.favoritesList.includes(id) && this.addButton()}
+          {table === "favorite" && this.removeButton()} */}
+          {this.displayButton(table, id)}
         </td>
       </tr>
     );
